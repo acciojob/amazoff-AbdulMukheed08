@@ -93,7 +93,16 @@ public class OrderRepository {
         int hh = lastDeliveryTime/60;
         int mm = lastDeliveryTime%60;
 
-        return String.valueOf(hh)+":"+String.valueOf(mm);
+        String hhs = String.valueOf(hh);
+        if(hh<10){
+            hhs = "0"+hhs;
+        }
+        String mms = String.valueOf(mm);
+        if(mm<10){
+            mms = "0"+mms;
+        }
+
+        return hhs+":"+mms;
     }
 
     public void deletePartnerById(String partnerId) {
