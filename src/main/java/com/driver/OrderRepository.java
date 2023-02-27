@@ -16,12 +16,15 @@ public class OrderRepository {
 
 
     public void addOrder(String orderId,Order order) {
+        if(orderMap.containsKey(orderId)) return;
         orderMap.put(orderId,order);
         unassignedOrderMap.put(orderId,order);
     }
 
     public void addPartner(String partnerId) {
-        deliveryPartnerMap.put(partnerId,new DeliveryPartner(partnerId));
+        if(deliveryPartnerMap.containsKey(partnerId)) return;
+        DeliveryPartner deliveryPartner = new DeliveryPartner(partnerId);
+        deliveryPartnerMap.put(partnerId,deliveryPartner);
         List<String> list = new ArrayList<>();
         assignedOrderMap.put(partnerId,list);
     }
@@ -29,6 +32,10 @@ public class OrderRepository {
     public void addOrderPartnerPair(String orderId, String partnerId) {
         //System.out.println(orderMap);
         //System.out.println(deliveryPartnerMap);
+
+        if(unassignedOrderMap.containsKey(orderId) == false){
+            return;
+        }
         List<String> list = assignedOrderMap.get(partnerId);
         list.add(orderId);
         assignedOrderMap.put(partnerId,list);
@@ -44,7 +51,7 @@ public class OrderRepository {
     }
 
     public Integer getOrderCountByPartnerId(String partnerId) {
-        System.out.println(assignedOrderMap);
+        //System.out.println(assignedOrderMap);
         return assignedOrderMap.get(partnerId).size();
     }
 
