@@ -33,9 +33,7 @@ public class OrderRepository {
         //System.out.println(orderMap);
         //System.out.println(deliveryPartnerMap);
 
-        if(unassignedOrderMap.containsKey(orderId) == false){
-            return;
-        }
+
         List<String> list = assignedOrderMap.get(partnerId);
         list.add(orderId);
         assignedOrderMap.put(partnerId,list);
